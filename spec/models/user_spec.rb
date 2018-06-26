@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-Rspec.describe User, type: :model do
+RSpec.describe User, type: :model do
   let(:user) {
     User.create(
-      name: "Camille"
-      email: "camille@neuner.com"
+      name: "Camille",
+      email: "camille@neuner.com",
       password: "testpassword"
     )
   }

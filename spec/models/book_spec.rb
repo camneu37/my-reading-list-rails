@@ -51,4 +51,10 @@ RSpec.describe Book, type: :model do
     expect(new_user.books).to include(book)
   end
 
+  it "has many comments" do
+    comm1 = book.comments.create(content: "Great Book!", user_id: user.id)
+    comm2 = book.comments.create(content: "Eh, it was ok.", user_id: user.id)
+    expect(book.comments.count).to eq(2)
+  end
+
 end

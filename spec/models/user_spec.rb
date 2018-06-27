@@ -29,6 +29,15 @@ RSpec.describe User, type: :model do
     expect(test_user).to be_invalid
   end
 
+  it "has many books" do
+    first_b = user.books.create(title: "Test Book 1")
+    second_b = user.books.create(title: "Test Book 2")
+    expect(user.books.first).to eq(first_b)
+    expect(user.books.last).to eq(second_b)
+  end
+
+  
+
 
 
 

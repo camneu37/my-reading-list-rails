@@ -44,5 +44,14 @@ RSpec.describe User, type: :model do
     expect(second_b.users).to include(user)
   end
 
+  it "has many comments" do
+    a = Author.create(name: "Tester")
+    first_b = user.books.create(title: "Test Book 1", author_id: a.id, genre: "Fiction")
+    second_b = user.books.create(title: "Test Book 2", author_id: a.id, genre: "Non-fiction")
+    comm1 = first_b.comments.create(content: "Great Book!", user_id: user.id)
+    comm2 = second_b.comments.create(content: "Eh, it was ok.", user_id: user.id)
+    expect(user.comments.count).to eq(2)
+  end
+
 
 end

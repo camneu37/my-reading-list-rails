@@ -9,9 +9,13 @@ RSpec.describe Book, type: :model do
     )
   }
 
+  let(:author) {
+    Author.create(name: "Frank")
+  }
+
   let (:book) {
-    user.books.create(
-      title: "Sticky Fingers"
+    author.books.create(
+      title: "Sticky Fingers",
       about: "Memoir of the creator of Rolling Stone magazine."
     )
   }
@@ -23,6 +27,9 @@ RSpec.describe Book, type: :model do
 
   it "belongs to and has many users" do
     new_user = book.users.create(name: "Will", email: "will@neuner.com", password: "testpassword")
-    expect(book.users.first).to eq(user)
-    expect(book.users.last).to eq(new_user)
+    book.users << user
+    expect(book.users.first).to eq(new_user)
+    expect(book.users.last).to eq(user)
   end
+
+end

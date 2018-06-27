@@ -36,9 +36,13 @@ RSpec.describe User, type: :model do
     expect(user.books.last).to eq(second_b)
   end
 
-  
-
-
+  it "belongs to many books" do
+    a = Author.create(name: "Tester")
+    first_b = user.books.create(title: "Test Book 1", author_id: a.id)
+    second_b = user.books.create(title: "Test Book 2", author_id: a.id)
+    expect(first_b.users).to include(user)
+    expect(second_b.users).to include(user)
+  end
 
 
 end

@@ -25,11 +25,18 @@ RSpec.describe Book, type: :model do
     expect(test_book).to be_invalid
   end
 
-  it "belongs to and has many users" do
+  it "has many users" do
     new_user = book.users.create(name: "Will", email: "will@neuner.com", password: "testpassword")
     book.users << user
     expect(book.users.first).to eq(new_user)
     expect(book.users.last).to eq(user)
+  end
+
+  it "belongs to many users" do
+    new_user = book.users.create(name: "Will", email: "will@neuner.com", password: "testpassword")
+    book.users << user
+    expect(user.books).to include(book)
+    expect(new_user.books).to include(book)
   end
 
 end

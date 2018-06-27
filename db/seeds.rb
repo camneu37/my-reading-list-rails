@@ -48,7 +48,26 @@ end
 
 main
 
+cam = User.find(1)
+will = User.find(2)
+carole = User.find(3)
+tony = User.find(4)
+
 hunt = Author.find(1)
 fitz = Author.find(2)
 
-def make_books
+fear = hunt.books.create(title: "Fear and Loathing in Las Vegas", about: "A drug fueled trip through the desert", genre: "Fiction")
+rum = hunt.books.create(title: "The Rum Diaries", about: "An alcoholic ex-pat journalist in Puerto Rico", genre: "Non-fiction")
+gatz = fitz.books.create(title: "The Great Gatsby", about: "Rich man tries to win back old love by throwing lavish parties", genre: "Fiction")
+
+cam.add_book_to_reading_list(fear)
+cam.add_book_to_reading_list(gatz)
+will.add_book_to_reading_list(rum)
+tony.add_book_to_reading_list(fear)
+tony.add_book_to_reading_list(rum)
+carole.add_book_to_reading_list(gatz)
+
+cam.comments.create(content: "Great book!", book_id: fear.id, private: true)
+cam.comments.create(content: "Loved it!", book_id: gatz.id, private: false)
+will.comments.create(content: "Awesome book.", book_id: fear.id, private: false)
+will.comments.create(content: "It was ok.", book_id: gatz.id, private: true)

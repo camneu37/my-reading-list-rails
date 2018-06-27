@@ -16,13 +16,25 @@ RSpec.describe Book, type: :model do
   let (:book) {
     author.books.create(
       title: "Sticky Fingers",
-      about: "Memoir of the creator of Rolling Stone magazine."
+      about: "Memoir of the creator of Rolling Stone magazine.",
+      genre: "Non-fiction"
     )
   }
 
   it "is not valid without a title" do
     test_book = Book.create(about: "Testingggg")
     expect(test_book).to be_invalid
+  end
+
+  it "is valid with a genre of 'Fiction' or 'Non-Fiction'" do
+    new_book = author.books.create(title: "A Test Book", genre: "Fiction")
+    expect(new_book).to be_valid
+    expect(book).to be_valid
+  end
+
+  it "is not valid with a genre of anything other than 'Fiction' or 'Non-Fiction'" do
+    new_book = author.books.create(title: "A Test Book", genre: "Scary")
+    expect(new_book).to be_invalid
   end
 
   it "has many users" do

@@ -38,8 +38,8 @@ RSpec.describe User, type: :model do
 
   it "belongs to many books" do
     a = Author.create(name: "Tester")
-    first_b = user.books.create(title: "Test Book 1", author_id: a.id)
-    second_b = user.books.create(title: "Test Book 2", author_id: a.id)
+    first_b = user.books.create(title: "Test Book 1", author_id: a.id, genre: "Fiction")
+    second_b = user.books.create(title: "Test Book 2", author_id: a.id, genre: "Non-fiction")
     expect(first_b.users).to include(user)
     expect(second_b.users).to include(user)
   end

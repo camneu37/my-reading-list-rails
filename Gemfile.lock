@@ -214,7 +214,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   byebug
-  capybara (>= 2.15, < 4.0)
+  capybara
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)

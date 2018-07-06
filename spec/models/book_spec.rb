@@ -57,4 +57,9 @@ RSpec.describe Book, type: :model do
     expect(book.comments.count).to eq(2)
   end
 
+  it "makes title titlecase before creation" do
+    new_book = Book.create(title: "a testing book of words", genre: 'Non-fiction', author_id: author.id)
+    expect(new_book.title).to eq("A Testing Book Of Words")
+  end
+
 end

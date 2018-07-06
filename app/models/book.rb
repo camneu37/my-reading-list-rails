@@ -8,7 +8,7 @@ class Book < ApplicationRecord
   before_validation :make_title_case
 
   def make_title_case
-    self.title.titlecase
+    self.title = self.title.titlecase if self.title
   end
 
   def author_name

@@ -5,4 +5,9 @@ class Book < ApplicationRecord
   belongs_to :author
   has_many :comments
   has_many :comment_writers, through: :comments, source: 'comment_writer'
+  before_validation :make_title_case
+
+  def make_title_case
+    self.title.titlecase
+  end
 end

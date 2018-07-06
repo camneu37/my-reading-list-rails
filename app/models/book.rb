@@ -10,4 +10,8 @@ class Book < ApplicationRecord
   def make_title_case
     self.title.titlecase
   end
+
+  def author_name
+    self.author.name
+  end
 end

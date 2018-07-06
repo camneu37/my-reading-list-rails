@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h3>Book Library</h3>
+</div>
+
+<div class="books-list">
+  <ul>
+    <% @books.each do |book| %>
+      <div class="book-item">
+        <li><%= link_to book.title, book_path(book)%></li>
+      </div>
+    <% end %>
+  </ul>
+</div>

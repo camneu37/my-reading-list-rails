@@ -8,6 +8,10 @@ class BooksController < ApplicationController
     @book = book
   end
 
+  def new
+    @book = Book.new
+  end
+
   private
 
     def book

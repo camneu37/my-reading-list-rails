@@ -1,0 +1,14 @@
+<%= form_for @book do |f| %>
+  <%= label_tag "Title:" %>
+  <%= f.text_field :title %>
+  <br>
+  <%= label_tag "Genre:" %>
+  <%= radio_button_tag :genre, "Fiction" %>
+  <%= label_tag "Fiction" %>
+  <%= radio_button_tag :genre, "Non-fiction" %>
+  <%= label_tag "Non-fiction" %>
+  <br>
+
+  <%= f.submit %>
+
+<% end %>

@@ -8,7 +8,12 @@
   <%= f.radio_button :genre, "Non-Fiction"%>
   <%= f.label "Non-Fiction" %>
   <br>
-  
+  <%= label_tag "Author (select from drop down or add new):" %><br>
+  <%= f.collection_select :author_id, Author.all, :id, :name, {include_blank: true} %><br>
+  <%= f.text_field :author %>
+  <br>
+
+  <!-- ##ADD IN THE REST OF A BOOK FORM - AUTHOR, ABOUT -->
 
   <%= f.submit %>
 

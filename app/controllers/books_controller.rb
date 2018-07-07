@@ -12,6 +12,10 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
+  def create
+    raise params.inspect
+  end
+
   private
 
     def book

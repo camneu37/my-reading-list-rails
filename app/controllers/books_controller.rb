@@ -36,6 +36,12 @@ class BooksController < ApplicationController
     @book = book
   end
 
+  def update
+    book.update(book_params)
+    redirect_to book_path(book)
+    # need add more to this to handle if user changes from an existing author to a new author and for handling any errors, if they delete title and such
+  end
+
   private
 
     def book

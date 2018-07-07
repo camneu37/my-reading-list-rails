@@ -19,8 +19,7 @@
   <br>
   <%= label_tag "Author (select from drop down or add new):" %><br>
   <%= f.collection_select :author_id, Author.all, :id, :name, {include_blank: true} %><br>
-  <%= f.text_field :author %>
-  <!-- need update the above - displaying object in the text area -->
+  <%= text_field_tag "book[author]"  %>
   <br>
   <%= label_tag "About:" %><br>
   <%= f.text_area :about %>

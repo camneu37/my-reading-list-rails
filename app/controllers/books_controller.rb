@@ -14,16 +14,21 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    # need also add in handling for missing title - use valid? and errors?
-    if params[:book][:author].empty? && params[:book][:author_id].empty?
-      render :new
-    elsif !params[:book][:author].empty? && !params[:book][:author_id].empty?
+    if !params[:book][:author].empty? && !params[:book][:author_id].empty?
+      @book.errors[:base] << "You cannot select an existing author and enter a new author."
       render :new
     elsif !params[:book][:author].empty?
       @book.build_author(name: params[:book][:author])
-      @book.save
+      if @book.save
+        redirect_to book_path(@book)
+      else
+        render :new
+      end
+    elsif !@book.valid?
+      render :new
     else
       @book.save
+      redirect_to book_path(@book)
     end
   end
 

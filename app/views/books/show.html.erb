@@ -6,6 +6,8 @@
   <ul>
     <li><%= @book.author_name %></li>
     <li><%= @book.genre %></li>
-    <li><%= @book.about %></li>
+    <% if !@book.about.empty? %>
+      <li><%= @book.about %></li>
+    <% end %>
   </ul>
 </div>

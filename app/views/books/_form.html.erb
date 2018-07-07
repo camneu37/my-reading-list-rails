@@ -1,3 +1,12 @@
+<% if @book.errors.any? %>
+  <ul>
+    <% @book.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 <%= form_for @book do |f| %>
   <%= label_tag "Title:" %>
   <%= f.text_field :title %>
@@ -5,8 +14,8 @@
   <%= label_tag "Genre:" %>
   <%= f.radio_button :genre, "Fiction" %>
   <%= f.label "Fiction"%>
-  <%= f.radio_button :genre, "Non-Fiction"%>
-  <%= f.label "Non-Fiction" %>
+  <%= f.radio_button :genre, "Non-fiction"%>
+  <%= f.label "Non-fiction" %>
   <br>
   <%= label_tag "Author (select from drop down or add new):" %><br>
   <%= f.collection_select :author_id, Author.all, :id, :name, {include_blank: true} %><br>

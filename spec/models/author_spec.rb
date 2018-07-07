@@ -25,4 +25,9 @@ RSpec.describe Author, type: :model do
     expect(author.books).to include(new_book)
   end
 
+  it "capitalizes name before creation" do
+    new_author = Author.create(name: "test author one")
+    expect(new_author.name).to eq("Test Author One")
+  end
+
 end

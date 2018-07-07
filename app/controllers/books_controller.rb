@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    binding.pry
   end
 
   private
@@ -22,4 +22,8 @@ class BooksController < ApplicationController
       @book ||= Book.find(params[:id])
     end
 
+    def book_params
+      params.require(:book).permit(:title, :author_id, :author, :genre, :about)
+    end
+    
 end

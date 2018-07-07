@@ -12,8 +12,9 @@
   <%= f.collection_select :author_id, Author.all, :id, :name, {include_blank: true} %><br>
   <%= f.text_field :author %>
   <br>
-
-  <!-- ##ADD IN THE REST OF A BOOK FORM - AUTHOR, ABOUT -->
+  <%= label_tag "About:" %><br>
+  <%= f.text_area :about %>
+  <br>
 
   <%= f.submit %>
 

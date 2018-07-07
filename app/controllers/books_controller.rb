@@ -32,6 +32,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def edit
+    @book = book
+  end
+
   private
 
     def book

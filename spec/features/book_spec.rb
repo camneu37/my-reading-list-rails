@@ -136,4 +136,14 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     expect(page).to have_content("About test book 4...")
   end
 
+  it 'does not allow for a duplicate book entry' do
+    visit '/books/new'
+    fill_in("book[title]", with: "test book 3")
+    choose("book_genre_non-fiction")
+    select("Test Author 1", from: "book_author_id")
+    click_button("Create Book")
+    expect(page).to have_content("New Book Form")
+    expect(page).to have_content("Title has already been taken")
+  end
+
 end

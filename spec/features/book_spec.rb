@@ -96,7 +96,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     fill_in("book[author]", with: "A new author")
     click_button("Create Book")
     expect(page).to have_content("New Book Form")
-    expect(page).to have_content("Author cannot select an existing author and enter a new author")
+    expect(page).to have_content("Author must be either selected from existing list or a new name entered")
   end
 
   it 'displays an error message if no author selected and no new author entered' do

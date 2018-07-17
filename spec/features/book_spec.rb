@@ -88,4 +88,38 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     expect(page).to have_content("Genre is not included in the list")
   end
 
+  it 'displays an error message if an author is selected as well as a new author entered' do
+    visit '/books/new'
+    fill_in("book[title]", with: "A new book")
+    choose("book_genre_fiction")
+    select("Test Author 1", from: "book_author_id")
+    fill_in("book[author]", with: "A new author")
+    click_button("Create Book")
+    expect(page).to have_content("New Book Form")
+    expect(page).to have_content("Author cannot select an existing author and enter a new author")
+  end
+
+  it 'displays an error message if no author selected and no new author entered' do
+    visit '/books/new'
+    fill_in("book[title]", with: "A new book")
+    choose("book_genre_fiction")
+    click_button("Create Book")
+    expect(page).to have_content("New Book Form")
+    expect(page).to have_content("Author must exist")
+  end
+
+  it 'creates a new book with an existing author' do
+    visit '/books/new'
+    fill_in("book[title]", with: "Test Book 4")
+    choose("book_genre_non-fiction")
+    select("Test Author 2", from: "book_author_id")
+    fill_in("book[about]", with: "About test book 4...")
+    click_button("Create Book")
+    expect(current_path).to eq("/books/4")
+    expect(page).to have_content("Test Book 4")
+    expect(page).to have_content("Test Author 2")
+    expect(page).to have_content("Non-fiction")
+    expect(page).to have_content("About test book 4...")
+  end
+
 end

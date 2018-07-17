@@ -27,6 +27,7 @@ class BooksController < ApplicationController
         render :new
       end
     else
+      @book.save
       render :new
     end
   end

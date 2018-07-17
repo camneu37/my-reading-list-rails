@@ -10,6 +10,12 @@ describe 'Feature Test: View Books in Library', type: :feature do
     @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
   end
 
+  it 'has an index page for the book library' do
+    visit '/books'
+    expect(current_path).to eq('/books')
+    expect(page).to have_content("Book Library")
+  end
+
   it 'has an index page listing all books' do
     visit '/books'
     expect(current_path).to eq('/books')

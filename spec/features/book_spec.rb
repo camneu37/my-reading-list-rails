@@ -1,6 +1,6 @@
 require_relative "../rails_helper.rb"
 
-describe 'Feature Test: View Books in Library', type: :feature do
+describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
 
   before :each do
     @author_one = Author.create(name: "Test Author 1")
@@ -18,7 +18,6 @@ describe 'Feature Test: View Books in Library', type: :feature do
 
   it 'has an index page listing all books' do
     visit '/books'
-    expect(current_path).to eq('/books')
     expect(page).to have_content(@book_one.title)
     expect(page).to have_content(@book_two.title)
     expect(page).to have_content(@book_three.title)
@@ -26,10 +25,26 @@ describe 'Feature Test: View Books in Library', type: :feature do
 
   it 'has an index page listing the author for each book' do
     visit '/books'
-    expect(current_path).to eq('/books')
     expect(page).to have_content(@author_one.name)
     expect(page).to have_content(@author_two.name)
   end
+
+  it 'links from the books index page to the books show pages' do
+    visit '/books'
+    click_link(@book_one.title)
+    expect(current_path).to eq('/books/1')
+    expect(page).to have_content(@book_one.title)
+    expect(page).to have_content(@book_one.genre)
+    expect(page).to have_content(@book_one.about)
+  end
+
+  it 'links from the books index page to the new book form' do
+    visit '/books'
+    click_link("Add a Book")
+    expect(current_path).to eq('/books/new')
+    expect(page).to have_content("New Book Form")
+  end
+
 
 
 

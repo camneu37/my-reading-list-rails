@@ -68,7 +68,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     expect(page).to have_button("Create Book")
   end
 
-  it 'it displays an error message if submit without a title' do
+  it 'displays an error message if submit without a title' do
     visit '/books/new'
     choose("book_genre_fiction")
     fill_in("book[author]", with: "A new author")
@@ -76,6 +76,16 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     click_button("Create Book")
     expect(page).to have_content("New Book Form")
     expect(page).to have_content("Title can't be blank")
+  end
+
+  it 'displays an error message if no genre selected' do
+    visit '/books/new'
+    fill_in("book[title]", with: "A new book")
+    fill_in("book[author]", with: "A new author")
+    fill_in("book[about]", with: "About a new book...")
+    click_button("Create Book")
+    expect(page).to have_content("New Book Form")
+    expect(page).to have_content("Genre is not included in the list")
   end
 
 end

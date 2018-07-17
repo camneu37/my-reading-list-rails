@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if double_author_entry?(params)
-      @book.errors.add(:author, "cannot select an existing author and enter a new author")
+      @book.errors.add(:author, "must be either selected from existing list or a new name entered")
       render :new
     elsif only_existing_author?(params) && @book.save
         redirect_to book_path(@book)

@@ -14,23 +14,24 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    if !params[:book][:author].empty? && !params[:book][:author_id].empty?
-      @book.errors[:base] << "You cannot select an existing author and enter a new author."
+    if double_author_entry?(params)
+      @book.errors.add(:author, "cannot select an existing author and enter a new author")
       render :new
-    elsif !params[:book][:author].empty?
+    elsif only_existing_author?(params) && @book.save
+        redirect_to book_path(@book)
+    elsif only_new_author?(params)
       @book.build_author(name: params[:book][:author])
       if @book.save
         redirect_to book_path(@book)
       else
         render :new
-      end
-    elsif !@book.valid?
-      render :new
     else
-      @book.save
-      redirect_to book_path(@book)
+      render :new
     end
   end
+
+
+
 
   def edit
     @book = book
@@ -52,4 +53,15 @@ class BooksController < ApplicationController
       params.require(:book).permit(:title, :author_id, :genre, :about)
     end
 
+    def double_author_entry?(params)
+      !params[:book][:author].empty? && !params[:book][:author_id].empty?
+    end
+
+    def only_existing_author?(params)
+      params[:book][:author].empty? && !params[:book][:author_id].empty?
+    end
+
+    def only_new_author?(params)
+      !params[:book][:author].empty? && params[:book][:author_id].empty?
+    end
 end

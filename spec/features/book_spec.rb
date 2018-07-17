@@ -122,4 +122,18 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     expect(page).to have_content("About test book 4...")
   end
 
+  it 'creates a new book with a new author' do
+    visit '/books/new'
+    fill_in("book[title]", with: "Test Book 4")
+    choose("book_genre_non-fiction")
+    fill_in("book[author]", with: "Test Author 3")
+    fill_in("book[about]", with: "About test book 4...")
+    click_button("Create Book")
+    expect(current_path).to eq("/books/4")
+    expect(page).to have_content("Test Book 4")
+    expect(page).to have_content("Test Author 3")
+    expect(page).to have_content("Non-fiction")
+    expect(page).to have_content("About test book 4...")
+  end
+
 end

@@ -45,7 +45,37 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
     expect(page).to have_content("New Book Form")
   end
 
+end
 
+describe 'Feature Test: Creating a New Book', type: :feature do
 
+  before :each do
+    @author_one = Author.create(name: "Test Author 1")
+    @author_two = Author.create(name: "Test Author 2")
+    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
+    @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
+    @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+  end
+
+  it 'has a new book form' do
+    visit '/books/new'
+    expect(current_path).to eq('/books/new')
+    expect(page).to have_content("New Book Form")
+    expect(page).to have_content("Title")
+    expect(page).to have_content("Genre")
+    expect(page).to have_content("Author")
+    expect(page).to have_content("About")
+    expect(page).to have_button("Create Book")
+  end
+
+  it 'it displays an error message if submit without a title' do
+    visit '/books/new'
+    choose("book_genre_fiction")
+    fill_in("book[author]", with: "A new author")
+    fill_in("book[about]", with: "About a new book...")
+    click_button("Create Book")
+    expect(page).to have_content("New Book Form")
+    expect(page).to have_content("Title can't be blank")
+  end
 
 end

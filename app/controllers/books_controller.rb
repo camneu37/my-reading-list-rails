@@ -25,6 +25,7 @@ class BooksController < ApplicationController
         redirect_to book_path(@book)
       else
         render :new
+      end
     else
       render :new
     end

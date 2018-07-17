@@ -15,7 +15,12 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     if only_new_author?(params)
-      @book.build_author(name: params[:book][:author])
+      a = Author.create(name: params[:book][:author])
+      if a.errors[:name].any?
+        @book.errors.add(:author, "already exists, please select their name from the dropdown")
+      else
+        @book.author = a
+      end
     elsif double_author_entry?(params)
       @book.errors.add(:author, "must be either selected from existing list or a new name entered")
     end

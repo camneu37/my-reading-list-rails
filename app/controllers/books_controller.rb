@@ -14,20 +14,14 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    if double_author_entry?(params)
-      @book.errors.add(:author, "must be either selected from existing list or a new name entered")
-      render :new
-    elsif only_existing_author?(params) && @book.save
-        redirect_to book_path(@book)
-    elsif only_new_author?(params)
+    if only_new_author?(params)
       @book.build_author(name: params[:book][:author])
-      if @book.save
-        redirect_to book_path(@book)
-      else
-        render :new
-      end
+    elsif double_author_entry?(params)
+      @book.errors.add(:author, "must be either selected from existing list or a new name entered")
+    end
+    if !@book.errors.any? && @book.save
+      redirect_to book_path(@book)
     else
-      @book.save
       render :new
     end
   end

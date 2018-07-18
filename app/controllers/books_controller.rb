@@ -41,9 +41,22 @@ class BooksController < ApplicationController
   end
 
   def update
-    book.update(book_params)
-    redirect_to book_path(book)
-    # need add more to this to handle if user changes from an existing author to a new author and for handling any errors, if they delete title and such
+    @book.update(book_params)
+    if only_new_author?(params)
+      a = Author.create(name: params[:book][:author])
+      if a.errors[:name].any?
+        @book.errors.add(:author, "already exists, please select their name from the dropdown")
+      else
+        @book.update(author: a)
+      end
+    elsif double_author_entry?(params)
+      @book.errors.add(:author, "must be either selected from existing list or a new name entered")
+    end
+    if @book.errors.any?
+      render :new
+    else
+      redirect_to book_path(@book)
+    end
   end
 
   private

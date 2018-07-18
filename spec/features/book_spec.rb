@@ -147,3 +147,30 @@ describe 'Feature Test: Creating a New Book', type: :feature do
   end
 
 end
+
+describe 'Feature Test: Editing a Book', type: :feature do
+
+  before :each do
+    @author_one = Author.create(name: "Test Author 1")
+    @author_two = Author.create(name: "Test Author 2")
+    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
+    @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
+    @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+  end
+
+  it 'allows you to view a form to edit details of an existing book' do
+    visit '/books/1/edit'
+    expect(current_path).to eq("/books/1/edit")
+    expect(page).to have_content("Edit Book")
+  end
+
+  it 'allows you to make edits to the book' do
+    visit '/books/1/edit'
+    fill_in("book[title]", with: "Test Book 1 Edited")
+    click_button("Update Book")
+    expect(current_path).to eq("/books/1")
+    expect(page).to have_content("Test Book 1 Edited")
+    expect(page).to have_content("Test Author 1")
+  end
+
+end

@@ -12,6 +12,8 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
+
+  ##try to refactor the create action to make it more lean
   def create
     @book = Book.new(book_params)
     if only_new_author?(params)

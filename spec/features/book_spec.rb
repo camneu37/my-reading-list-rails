@@ -189,7 +189,23 @@ describe 'Feature Test: Editing a Book', type: :feature do
     click_button("Update Book")
     expect(current_path).to eq("/books/1")
     expect(page).to have_content("Test Book 1")
-    expect(page).to have_content("Test Author 3")    
+    expect(page).to have_content("Test Author 3")
+  end
+
+  it 'does not allow you to select an existing author and add a new one' do
+    visit '/books/1/edit'
+    fill_in("book[author]", with: "Test Author 3")
+    click_button("Update Book")
+    expect(page).to have_content("Edit Book")
+    expect(page).to have_content("Author must be either selected from existing list or a new name entered")
+  end
+
+  it 'does not allow you to remove author from book without choosing a new author' do
+    visit '/books/1/edit'
+    select("", from: "book_author_id")
+    click_button("Update Book")
+    expect(page).to have_content("Edit Book")
+    expect(page).to have_content("Author must be entered")
   end
 
 end

@@ -51,6 +51,8 @@ class BooksController < ApplicationController
       end
     elsif double_author_entry?(params)
       book.errors.add(:author, "must be either selected from existing list or a new name entered")
+    elsif no_author_entry?(params)
+      book.errors.add(:author, "must be entered")
     end
     if book.errors.any?
       render :edit
@@ -80,4 +82,9 @@ class BooksController < ApplicationController
     def only_new_author?(params)
       !params[:book][:author].empty? && params[:book][:author_id].empty?
     end
+
+    def no_author_entry?(params)
+      params[:book][:author].empty? && params[:book][:author_id].empty?
+    end
+
 end

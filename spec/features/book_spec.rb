@@ -164,13 +164,32 @@ describe 'Feature Test: Editing a Book', type: :feature do
     expect(page).to have_content("Edit Book")
   end
 
-  it 'allows you to make edits to the book' do
+  it 'allows you to edit the books title' do
     visit '/books/1/edit'
     fill_in("book[title]", with: "Test Book 1 Edited")
     click_button("Update Book")
     expect(current_path).to eq("/books/1")
     expect(page).to have_content("Test Book 1 Edited")
     expect(page).to have_content("Test Author 1")
+  end
+
+  it 'allows you to edit the books genre' do
+    visit '/books/1/edit'
+    choose("book_genre_non-fiction")
+    click_button("Update Book")
+    expect(current_path).to eq("/books/1")
+    expect(page).to have_content("Test Book 1")
+    expect(page).to have_content("Non-fiction")
+  end
+
+  it 'allows you to edit the author details of the book' do
+    visit '/books/1/edit'
+    select("", from: "book_author_id")
+    fill_in("book[author]", with: "Test Author 3")
+    click_button("Update Book")
+    expect(current_path).to eq("/books/1")
+    expect(page).to have_content("Test Book 1")
+    expect(page).to have_content("Test Author 3")    
   end
 
 end

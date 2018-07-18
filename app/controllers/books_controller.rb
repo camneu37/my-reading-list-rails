@@ -41,21 +41,21 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book.update(book_params)
+    book.update(book_params)
     if only_new_author?(params)
       a = Author.create(name: params[:book][:author])
       if a.errors[:name].any?
-        @book.errors.add(:author, "already exists, please select their name from the dropdown")
+        book.errors.add(:author, "already exists, please select their name from the dropdown")
       else
-        @book.update(author: a)
+        book.update(author: a)
       end
     elsif double_author_entry?(params)
-      @book.errors.add(:author, "must be either selected from existing list or a new name entered")
+      book.errors.add(:author, "must be either selected from existing list or a new name entered")
     end
-    if @book.errors.any?
-      render :new
+    if book.errors.any?
+      render :edit
     else
-      redirect_to book_path(@book)
+      redirect_to book_path(book)
     end
   end
 

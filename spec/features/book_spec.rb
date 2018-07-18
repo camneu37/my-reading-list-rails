@@ -182,7 +182,7 @@ describe 'Feature Test: Editing a Book', type: :feature do
     expect(page).to have_content("Non-fiction")
   end
 
-  it 'allows you to edit the author details of the book' do
+  it 'allows you to edit and create a new author for the book' do
     visit '/books/1/edit'
     select("", from: "book_author_id")
     fill_in("book[author]", with: "Test Author 3")
@@ -190,6 +190,15 @@ describe 'Feature Test: Editing a Book', type: :feature do
     expect(current_path).to eq("/books/1")
     expect(page).to have_content("Test Book 1")
     expect(page).to have_content("Test Author 3")
+  end
+
+  it 'allows you to select a different author from existing authors' do
+    visit '/books/1/edit'
+    select("Test Author 2", from: "book_author_id")
+    click_button("Update Book")
+    expect(current_path).to eq("/books/1")
+    expect(page).to have_content("Test Book 1")
+    expect(page).to have_content("Test Author 2")
   end
 
   it 'does not allow you to select an existing author and add a new one' do

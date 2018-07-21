@@ -23,12 +23,6 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
     expect(page).to have_content(@book_three.title)
   end
 
-  it 'has an index page listing the author for each book' do
-    visit '/books'
-    expect(page).to have_content(@author_one.name)
-    expect(page).to have_content(@author_two.name)
-  end
-
   it 'links from the books index page to the books show pages' do
     visit '/books'
     click_link(@book_one.title)
@@ -43,6 +37,35 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
     click_link("Add a Book")
     expect(current_path).to eq('/books/new')
     expect(page).to have_content("New Book Form")
+  end
+
+end
+
+describe 'Feature Test: Viewing a Books Details', type: :feature do
+
+  before :each do
+    @author_one = Author.create(name: "Test Author 1")
+    @author_two = Author.create(name: "Test Author 2")
+    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
+    @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
+    @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+  end
+
+  it 'shows the books title, author, genre and about (if present)' do
+    visit '/books/1'
+    expect(current_path).to eq('/books/1')
+    expect(page).to have_content("Test Book 1")
+    expect(page).to have_content("Test Author 1")
+    expect(page).to have_content("A new test book")
+    expect(page).to have_content("Fiction")
+  end
+
+  it 'links to the authors show page' do
+    visit '/books/1'
+    expect(page).to have_link("Test Author 1")
+    click_link("Test Author 1")
+    expect(current_path).to eq('/authors/1')
+    expect(page).to have_content("Test Author 1")
   end
 
 end

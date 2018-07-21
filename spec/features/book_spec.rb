@@ -217,4 +217,13 @@ describe 'Feature Test: Editing a Book', type: :feature do
     expect(page).to have_content("Author must be entered")
   end
 
+  it 'allows you to edit the about details for the book' do
+    visit '/books/1/edit'
+    fill_in("book[about]", with: "About book 1...")
+    click_button("Update Book")
+    expect(current_path).to eq("/books/1")
+    expect(page).to have_content("Test Book 1")
+    expect(page).to have_content("About book 1...")
+  end
+
 end

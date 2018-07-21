@@ -68,6 +68,15 @@ describe 'Feature Test: Viewing a Books Details & Deleting a Book', type: :featu
     expect(page).to have_content("Test Author 1")
   end
 
+  it 'has a button for editing a book' do
+    visit '/books/1'
+    expect(page).to have_button("Edit Book")
+    click_button("Edit Book")
+    expect(current_path).to eq("/books/1/edit")
+    expect(page).to have_content("Edit Book")
+    expect(page).to have_button("Update Book")
+  end
+
   it 'allows for deleting a book' do
     visit '/books/1'
     expect(page).to have_button("Delete Book")

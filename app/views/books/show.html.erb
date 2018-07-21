@@ -12,6 +12,10 @@
   </ul>
 </div>
 
+<%= form_tag edit_book_path(@book.id), method: "get" do %>
+  <%= submit_tag "Edit Book" %>
+<% end %>
+
 <%= form_tag book_path(@book.id), method: "delete" do %>
   <%= submit_tag "Delete Book" %>
 <% end %>

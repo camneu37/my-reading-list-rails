@@ -227,3 +227,18 @@ describe 'Feature Test: Editing a Book', type: :feature do
   end
 
 end
+
+describe 'Feature Test: Deleting a Book', type: :feature do
+
+  before :each do
+    @author_one = Author.create(name: "Test Author 1")
+    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
+  end
+
+  it 'allows you to delete a book' do
+    visit '/books/1'
+    click_button("Delete Book")
+    expect(current_path).to eq("/books")
+    expect(page).to have_content("You've successfully deleted #{@book_one.title}.")
+  end
+end

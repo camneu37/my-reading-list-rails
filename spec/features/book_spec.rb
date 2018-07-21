@@ -41,7 +41,7 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
 
 end
 
-describe 'Feature Test: Viewing a Books Details', type: :feature do
+describe 'Feature Test: Viewing a Books Details & Deleting a Book', type: :feature do
 
   before :each do
     @author_one = Author.create(name: "Test Author 1")
@@ -66,6 +66,14 @@ describe 'Feature Test: Viewing a Books Details', type: :feature do
     click_link("Test Author 1")
     expect(current_path).to eq('/authors/1')
     expect(page).to have_content("Test Author 1")
+  end
+
+  it 'allows for deleting a book' do
+    visit '/books/1'
+    expect(page).to have_button("Delete Book")
+    click_button("Delete Book")
+    expect(current_path).to eq("/books")
+    expect(page).to have_content("You've successfully deleted #{@book_one.title}.")
   end
 
 end
@@ -249,19 +257,4 @@ describe 'Feature Test: Editing a Book', type: :feature do
     expect(page).to have_content("About book 1...")
   end
 
-end
-
-describe 'Feature Test: Deleting a Book', type: :feature do
-
-  before :each do
-    @author_one = Author.create(name: "Test Author 1")
-    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
-  end
-
-  it 'allows you to delete a book' do
-    visit '/books/1'
-    click_button("Delete Book")
-    expect(current_path).to eq("/books")
-    expect(page).to have_content("You've successfully deleted #{@book_one.title}.")
-  end
 end

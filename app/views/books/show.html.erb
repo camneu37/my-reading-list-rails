@@ -4,7 +4,7 @@
 
 <div class="book-attrs list">
   <ul>
-    <li><%= @book.author_name %></li>
+    <li><%= link_to @book.author_name, author_path(@book.author) %></li>
     <li><%= @book.genre %></li>
     <% if !@book.about.empty? %>
       <li><%= @book.about %></li>

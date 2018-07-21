@@ -11,3 +11,7 @@
     <% end %>
   </ul>
 </div>
+
+<%= form_tag book_path(@book.id), method: "delete" do %>
+  <%= submit_tag "Delete Book" %>
+<% end %>

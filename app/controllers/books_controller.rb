@@ -40,6 +40,7 @@ class BooksController < ApplicationController
     @book = book
   end
 
+  #try to refactor to make it more lean
   def update
     book.update(book_params)
     if only_new_author?(params)
@@ -59,6 +60,12 @@ class BooksController < ApplicationController
     else
       redirect_to book_path(book)
     end
+  end
+
+  def destroy
+    book.destroy
+    flash[:message] = "You've successfully deleted #{book.title}."
+    redirect_to books_path
   end
 
   private

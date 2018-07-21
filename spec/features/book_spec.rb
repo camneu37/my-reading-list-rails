@@ -32,9 +32,9 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
     expect(page).to have_content(@book_one.about)
   end
 
-  it 'links from the books index page to the new book form' do
+  it 'has a button to get to the new book form' do
     visit '/books'
-    click_link("Add a Book")
+    click_button("Add a Book")
     expect(current_path).to eq('/books/new')
     expect(page).to have_content("New Book Form")
   end

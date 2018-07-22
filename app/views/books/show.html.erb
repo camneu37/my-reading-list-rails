@@ -18,3 +18,12 @@
 <%= button_to "Edit Book", edit_book_path(@book.id), method: "get" if current_user.id == @book.creator_id %>
 
 <!-- <%= button_to "Delete Book", book_path(@book.id), method: "delete" %> -->
+
+<br><br>
+
+
+<%= form_for [@book, @comment] do |f| %>
+  <%= f.text_area :content %>
+  <br>
+  <%= f.submit "Add Comment"%>
+<% end %>

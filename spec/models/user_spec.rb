@@ -4,29 +4,29 @@ RSpec.describe User, type: :model do
   let(:user) {
     User.create(
       name: "Camille",
-      email: "camille@neuner.com",
-      password: "testpassword"
+      username: "camille1",
+      password: "testpassword",
+      password_confirmation: "testpassword"
     )
   }
 
   it "is not valid without a name" do
-    test_user = User.create(email: "test@test.com", password: "test")
+    test_user = User.create(username: "testing", password: "test")
     expect(test_user).to be_invalid
   end
 
-  it "is not valid without an email" do
+  it "is not valid without a username" do
     test_user = User.create(name: "Tester", password: "test")
     expect(test_user).to be_invalid
   end
 
   it "is not valid without a password" do
-    test_user = User.create(name: "Tester", email: "test@test.com")
+    test_user = User.create(name: "Tester", username: "tester")
     expect(test_user).to be_invalid
   end
 
-  it "must have a valid email address" do
-    test_user = User.create(name: "Tester", email: "tester", password: "tester")
-    expect(test_user).to be_invalid
+  it "must have a unique username" do
+    test_user = User.create(name: "Camille", username: "camille1", password: "test")
   end
 
   it "has many books" do

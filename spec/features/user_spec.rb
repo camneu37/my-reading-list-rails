@@ -78,6 +78,19 @@ describe 'Feature Test: User Sign Up', type: :feature do
 
 end
 
+describe 'Feature Test: User Login', type: :feature do
+
+  it 'takes user to log in page from home page' do
+    visit '/'
+    click_link("Log In")
+    expect(current_path).to eq("/sessions/new")
+    expect(page).to have_content("Username")
+    expect(page).to have_content("Password")
+    expect(page).to have_button("Log In")
+  end
+
+end
+
 describe 'Feature Test: Users Homepage', type: :feature do
 
   before :each do

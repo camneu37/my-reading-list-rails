@@ -22,7 +22,7 @@
         </ul>
         <% if logged_in? %>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Log Out", session_path, method: :delete %></li>
+            <li><%= button_to "Log Out", session_path(current_user.id), method: "delete" %></li>
           </ul>
         <% end %>
       </div>

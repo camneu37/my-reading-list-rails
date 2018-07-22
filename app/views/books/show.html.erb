@@ -27,3 +27,14 @@
   <br>
   <%= f.submit "Add Comment"%>
 <% end %>
+
+<br><br>
+
+<% if @book.comments.any? %>
+  <h4>User comments on this book:</h4>
+  <ul>
+    <% @book.comments.each do |com| %>
+      <li><%= com.comment_writer.username %> says: <%= com.content %></li>
+    <% end %>
+  </ul>
+<% end %>

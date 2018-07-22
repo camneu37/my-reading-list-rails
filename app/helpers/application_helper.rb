@@ -5,6 +5,6 @@ module ApplicationHelper
   end
 
   def logged_in?
-    current_user.id == session[:user_id]
+    !!session[:user_id]
   end
 end

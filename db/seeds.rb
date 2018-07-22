@@ -7,12 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 DATA = {
-  user_keys: ["name", "email", "password"],
+  user_keys: ["name", "username", "password", "password_confirmation"],
   users: [
-    ["Camille", "camille@neuner.com", "camille"],
-    ["Will", "will@neuner.com", "will"],
-    ["Carole", "carole@neuner.com", "carole"],
-    ["Tony", "tony@neuner.com", "tony"]
+    ["Camille", "camille", "camille", "camille"],
+    ["Will", "will", "will", "will"],
+    ["Carole", "carole", "carole", "carole"],
+    ["Tony", "tony", "tony", "tony"]
   ],
   author_keys: ["name"],
   authors: [

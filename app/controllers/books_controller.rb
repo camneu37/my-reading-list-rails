@@ -28,6 +28,7 @@ class BooksController < ApplicationController
       @book.errors.add(:author, "must be either selected from existing list or a new name entered")
     end
     if !@book.errors.any? && @book.save
+      @book.creator_id = current_user.id
       redirect_to book_path(@book)
     else
       render :new
@@ -39,6 +40,9 @@ class BooksController < ApplicationController
 
   def edit
     @book = book
+    if @book.creator_id != current_user.id
+      redirect_to book_path(@book)
+    end
   end
 
   #try to refactor to make it more lean

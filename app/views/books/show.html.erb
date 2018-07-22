@@ -14,6 +14,6 @@
 
 <%= button_to "Add Book to Reading List", add_book_path(@book) if !current_user.books.include?(@book)%>
 
-<%= button_to "Edit Book", edit_book_path(@book.id), method: "get" %>
+<%= button_to "Edit Book", edit_book_path(@book.id), method: "get" if current_user.id == @book.creator_id %>
 
 <%= button_to "Delete Book", book_path(@book.id), method: "delete" %>

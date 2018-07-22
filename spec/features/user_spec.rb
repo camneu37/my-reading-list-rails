@@ -114,6 +114,14 @@ describe 'Feature Test: User Login', type: :feature do
     expect(page).to have_content("#{@user.name}'s Reading List'")
   end
 
+  it 'prompts user to try again or create account if user info doesnt exist' do
+    visit '/sessions/new'
+    fill_in("user[username]", with: "cam")
+    fill_in("user[password]", with: "cam")
+    click_button("Log In")
+    expect(page).to have_content("We couldn't find an account with that username, please try again or create a new account.")
+  end
+
 end
 
 describe 'Feature Test: Users Homepage', type: :feature do

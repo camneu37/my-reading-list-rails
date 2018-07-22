@@ -1,1 +1,6 @@
 <h2><%= @user.name %>'s Reading List</h2>
+<ul>
+  <% @user.books.each do |b| %>
+    <li><%= link_to b.title, book_path(b) %></li>
+  <% end %>
+</ul>

@@ -20,8 +20,11 @@
           <li><a href="/books">Book Library</a></li>
           <li><a href="/authors">Author List</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-        </ul>
+        <% if logged_in? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Log Out", session_path, method: :delete %></li>
+          </ul>
+        <% end %>
       </div>
     </nav>
 

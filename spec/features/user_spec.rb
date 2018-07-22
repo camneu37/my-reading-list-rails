@@ -95,31 +95,41 @@ describe 'Feature Test: User Login', type: :feature do
 
   it 'does not allow a user to log in without username' do
     visit '/sessions/new'
-    fill_in("user[password]", with: "test")
-    expect(page).to have_content("Must enter username")
+    fill_in("password", with: "test")
+    click_button("Log In")
+    expect(page).to have_content("Must fill in username and password fields")
   end
 
   it 'does not allow a user to log in without password' do
     visit '/sessions/new'
-    fill_in("user[username]", with: "test user")
-    expect(page).to have_content("Must enter password")
+    fill_in("username", with: "test user")
+    click_button("Log In")
+    expect(page).to have_content("Must fill in username and password fields")
   end
 
   it 'redirects to users homepage if login successful' do
     visit '/sessions/new'
-    fill_in("user[username]", with: "test user")
-    fill_in("user[password]", with: "test")
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
     click_button("Log In")
     expect(current_path).to eq("/users/#{@user.id}")
-    expect(page).to have_content("#{@user.name}'s Reading List'")
+    expect(page).to have_content("#{@user.name}'s Reading List")
   end
 
   it 'prompts user to try again or create account if user info doesnt exist' do
     visit '/sessions/new'
-    fill_in("user[username]", with: "cam")
-    fill_in("user[password]", with: "cam")
+    fill_in("username", with: "cam")
+    fill_in("password", with: "cam")
     click_button("Log In")
     expect(page).to have_content("We couldn't find an account with that username, please try again or create a new account.")
+  end
+
+  it 'prompts user to enter correct password if authentication fails' do
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "cam")
+    click_button("Log In")
+    expect(page).to have_content("The password you entered was incorrect. Please try again.")
   end
 
 end

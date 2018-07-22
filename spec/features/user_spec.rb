@@ -1,12 +1,6 @@
 require_relative "../rails_helper.rb"
 
 describe 'Feature Test: User Sign Up', type: :feature do
-  it 'presents user with the option to create an account' do
-    visit '/'
-    expect(page).to have_content("Welcome to My Reading List!")
-    expect(page).to have_link("Sign Up")
-    expect(page).to have_link("Log In")
-  end
 
   it 'links from home to the user sign up page' do
     visit '/'
@@ -84,15 +78,6 @@ describe 'Feature Test: User Login', type: :feature do
     @user = User.create(name: "Test User", username: "test user", password: "test", password_confirmation: "test")
   end
 
-  it 'takes user to log in page from home page' do
-    visit '/'
-    click_link("Log In")
-    expect(current_path).to eq("/sessions/new")
-    expect(page).to have_content("Username")
-    expect(page).to have_content("Password")
-    expect(page).to have_button("Log In")
-  end
-
   it 'does not allow a user to log in without username' do
     visit '/sessions/new'
     fill_in("password", with: "test")
@@ -163,6 +148,17 @@ describe 'Feature Test: Users Homepage', type: :feature do
     @user = User.create(name: "Test User", username: "test_user", password: "test", password_confirmation: "test")
     @user.add_book_to_reading_list(@book_one)
     @user.add_book_to_reading_list(@book_three)
+  end
+
+  it 'shows all books in users reading list' do
+    visit '/sessions/new'
+    fill_in("username", with: "test_user")
+    fill_in("password", with: "test")
+    click_button("Log In")
+    expect(current_path).to eq("/users/1")
+    expect(page).to have_content("Test Book 1")
+    expect(page).to have_content("Test Book 3")
+    expect(page).to have_no_content("Test Book 2")
   end
 
 

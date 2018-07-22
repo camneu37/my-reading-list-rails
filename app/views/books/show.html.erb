@@ -12,6 +12,8 @@
   </ul>
 </div>
 
+<%= button_to "Add Book to Reading List", add_book_path(@book) %>
+
 <%= button_to "Edit Book", edit_book_path(@book.id), method: "get" %>
 
 <%= button_to "Delete Book", book_path(@book.id), method: "delete" %>

@@ -69,6 +69,12 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def add
+    @book = book
+    current_user.add_book_to_reading_list(@book)
+    redirect_to user_path(current_user)
+  end
+
   private
 
     def book

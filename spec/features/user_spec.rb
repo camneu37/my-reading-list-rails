@@ -161,5 +161,4 @@ describe 'Feature Test: Users Homepage', type: :feature do
     expect(page).to have_no_content("Test Book 2")
   end
 
-
 end

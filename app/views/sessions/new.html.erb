@@ -1,3 +1,9 @@
+<% if flash[:message] %>
+  <div class="flash-message">
+    <h3><%= flash[:message] %></h3>
+  </div>
+<% end %>
+
 <%= form_tag('/sessions') do %>
   <%= label_tag "Username" %>
   <%= text_field_tag "user[username]" %>

@@ -80,6 +80,10 @@ end
 
 describe 'Feature Test: User Login', type: :feature do
 
+  before :each do
+    @user = User.create(name: "Test User", username: "test user", password: "test", password_confirmation: "test")
+  end
+
   it 'takes user to log in page from home page' do
     visit '/'
     click_link("Log In")
@@ -87,6 +91,27 @@ describe 'Feature Test: User Login', type: :feature do
     expect(page).to have_content("Username")
     expect(page).to have_content("Password")
     expect(page).to have_button("Log In")
+  end
+
+  it 'does not allow a user to log in without username' do
+    visit '/sessions/new'
+    fill_in("user[password]", with: "test")
+    expect(page).to have_content("Must enter username")
+  end
+
+  it 'does not allow a user to log in without password' do
+    visit '/sessions/new'
+    fill_in("user[username]", with: "test user")
+    expect(page).to have_content("Must enter password")
+  end
+
+  it 'redirects to users homepage if login successful' do
+    visit '/sessions/new'
+    fill_in("user[username]", with: "test user")
+    fill_in("user[password]", with: "test")
+    click_button("Log In")
+    expect(current_path).to eq("/users/#{@user.id}")
+    expect(page).to have_content("#{@user.name}'s Reading List'")
   end
 
 end

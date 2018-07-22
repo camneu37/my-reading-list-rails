@@ -44,7 +44,7 @@ describe 'Feature Test: User Sign Up', type: :feature do
     expect(page).to have_content("Password can't be blank")
   end
 
-  it 'does note allow account creation without password confirmation' do
+  it 'does not allow account creation without password confirmation' do
     visit '/users/new'
     fill_in("user[name]", with: "Test User")
     fill_in("user[username]", with: "test_user")
@@ -52,6 +52,17 @@ describe 'Feature Test: User Sign Up', type: :feature do
     click_button("Sign Up")
     expect(page).to have_content("Create an Account")
     expect(page).to have_content("Password confirmation can't be blank")
+  end
+
+  it 'does not allow for user creation if password confirmation doesnt match password' do
+    visit '/users/new'
+    fill_in("user[name]", with: "Test User")
+    fill_in("user[username]", with: "test_user")
+    fill_in("user[password]", with: "test")
+    fill_in("user[password_confirmation]", with: "tester")
+    click_button("Sign Up")
+    expect(page).to have_content("Create an Account")
+    expect(page).to have_content("Password confirmation doesn't match Password")
   end
 
 end

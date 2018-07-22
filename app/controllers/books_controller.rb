@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authentication_required
 
   def index
     @books = Book.all

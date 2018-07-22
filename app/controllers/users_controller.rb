@@ -20,6 +20,11 @@ class UsersController < ApplicationController
 
   def show
     @user = user
+    if current_user != user
+      redirect_to root_path
+    else
+      @user
+    end
   end
 
   private

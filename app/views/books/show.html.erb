@@ -12,7 +12,7 @@
   </ul>
 </div>
 
-<%= button_to "Add Book to Reading List", add_book_path(@book) %>
+<%= button_to "Add Book to Reading List", add_book_path(@book) if !current_user.books.include?(@book)%>
 
 <%= button_to "Edit Book", edit_book_path(@book.id), method: "get" %>
 

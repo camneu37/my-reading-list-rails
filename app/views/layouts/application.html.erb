@@ -20,11 +20,14 @@
           <li><a href="/books">Book Library</a></li>
           <li><a href="/authors">Author List</a></li>
         </ul>
-        <% if logged_in? %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= button_to "Log Out", session_path(current_user.id), method: "delete" %></li>
-          </ul>
-        <% end %>
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li><%= button_to "Log Out", session_path(current_user.id), method: "delete", class: "btn navbar-btn btn-danger" %></li>
+          <% else %>
+            <li><a href="/users/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/sessions/new"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <% end %>
+        </ul>
       </div>
     </nav>
 

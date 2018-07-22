@@ -79,6 +79,12 @@ class BooksController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def remove
+    @book = book
+    current_user.remove_book_from_reading_list(@book)
+    redirect_to user_path(current_user)
+  end
+
   private
 
     def book

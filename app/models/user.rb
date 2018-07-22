@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def add_book_to_reading_list(book)
     books << book
   end
+
+  def remove_book_from_reading_list(book)
+    books.delete(book)
+  end
 end

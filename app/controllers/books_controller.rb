@@ -28,7 +28,8 @@ class BooksController < ApplicationController
       @book.errors.add(:author, "must be either selected from existing list or a new name entered")
     end
     if !@book.errors.any? && @book.save
-      @book.creator_id = current_user.id
+      @book.update(creator_id: current_user.id)
+      current_user.add_book_to_reading_list(@book)
       redirect_to book_path(@book)
     else
       render :new

@@ -65,4 +65,15 @@ describe 'Feature Test: User Sign Up', type: :feature do
     expect(page).to have_content("Password confirmation doesn't match Password")
   end
 
+  it 'allows for successful creation of a new user' do
+    visit '/users/new'
+    fill_in("user[name]", with: "Test User")
+    fill_in("user[username]", with: "test_user")
+    fill_in("user[password]", with: "test")
+    fill_in("user[password_confirmation]", with: "test")
+    click_button("Sign Up")
+    expect(current_path).to eq("/users/1")
+    expect(page).to have_content("Test User's Reading List")   
+  end
+
 end

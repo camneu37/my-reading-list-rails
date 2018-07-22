@@ -12,7 +12,7 @@ describe 'Feature Test: User Sign Up', type: :feature do
     visit '/'
     click_link("Sign Up")
     expect(current_path).to eq("/users/new")
-    expect(page).to have_content("Create an account")
+    expect(page).to have_content("Create an Account")
   end
 
 

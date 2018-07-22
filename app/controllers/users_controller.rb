@@ -10,12 +10,20 @@ class UsersController < ApplicationController
       render :new
     else
       session[:user_id] = @user.id
-      redirect_to root
+      redirect_to root_path
     end
+  end
+
+  def show
+    @user = user
   end
 
   private
     def user_params
       params.require(:user).permit(:name, :username, :password, :password_confirmation)
+    end
+
+    def user
+      @user ||= User.find(params[:id])
     end
 end

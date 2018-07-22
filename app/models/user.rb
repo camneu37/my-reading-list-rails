@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
-  validates :name, :email, :password, presence: true
-  validates :email, uniqueness: true, format: /@/
+  validates :name, :username, :password, presence: true
+  validates :username, uniqueness: true
+  validates :password, confirmation: true
+  validates :password_confirmation, presence: true
   has_and_belongs_to_many :books
   has_many :comments
   has_many :books_commented, through: :comments, source: 'book_commented'

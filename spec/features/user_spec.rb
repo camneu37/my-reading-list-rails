@@ -8,7 +8,7 @@ describe 'Feature Test: User Sign Up', type: :feature do
     expect(page).to have_link("Log In")
   end
 
-  it 'links to the user sign up page' do
+  it 'links from home to the user sign up page' do
     visit '/'
     click_link("Sign Up")
     expect(current_path).to eq("/users/new")
@@ -138,6 +138,15 @@ describe 'Feature Test: User Login', type: :feature do
     fill_in("password", with: "test")
     click_button("Log In")
     visit '/sessions/new'
+    expect(current_path).to eq("/users/1")
+  end
+
+  it 'does not allow user to see sign up page if logged in' do
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
+    click_button("Log In")
+    visit '/users/new'
     expect(current_path).to eq("/users/1")
   end
 

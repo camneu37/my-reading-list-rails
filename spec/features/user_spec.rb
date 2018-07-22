@@ -132,6 +132,15 @@ describe 'Feature Test: User Login', type: :feature do
     expect(page).to have_content("The password you entered was incorrect. Please try again.")
   end
 
+  it 'does not allow user to see login page if logged in' do
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
+    click_button("Log In")
+    visit '/sessions/new'
+    expect(current_path).to eq("/users/1")
+  end
+
 end
 
 describe 'Feature Test: Users Homepage', type: :feature do

@@ -32,6 +32,10 @@ gem 'pry'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

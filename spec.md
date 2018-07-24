@@ -8,10 +8,10 @@ Specs:
 - [X] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity) - Comments have content and private attributes (i.e. Comments belong_to Book (as book_commented) and User (as comment_writer) and thus have book_id and user_id, but also have submittable attributes of content (i.e. what the user said about the book) and a boolean attribute of private (i.e. true if they don't want other users to see the comment they left on a book))
 - [X] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) - validations on User, Comment, Book & Author
 - [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-- [ ] Include signup (how e.g. Devise)
-- [ ] Include login (how e.g. Devise)
-- [ ] Include logout (how e.g. Devise)
-- [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
+- [X] Include signup (how e.g. Devise) - Welcome page links to a signup form (/users/new) which takes user input of name, username, password, and password confirmation and that form submits to users#create, which creates a new user (if no errors) and logs them in.
+- [X] Include login (how e.g. Devise) - Welcome page links to a login form (/sessions/new) which takes user input of username and password and that form submits to sessions#create, which logs the user in if their username can be found and then password authenticated.
+- [X] Include logout (how e.g. Devise) - When a user is logged in, there is a logout button present in the navbar. The button submits to sessions#delete which clears the session id, sets current user to nil, and then redirects to welcome page.
+- [X] Include third party signup/login (how e.g. Devise/OmniAuth) - Using OmniAuth and OmniAuth-Facebook gems to allow for signup/login via FB. There is a link on homepage for signing up/logging in via FB.
 - [ ] Include nested resource show or index (URL e.g. users/2/recipes)
 - [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
 - [ ] Include form display of validation errors (form URL e.g. /recipes/new)

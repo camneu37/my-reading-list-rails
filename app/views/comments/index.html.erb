@@ -1,0 +1,9 @@
+<div class="page-header">
+  <h2>User comments on <%= @book.title %>:<h2>
+</div>
+
+<ul>
+  <% @comments.each do |comm| %>
+    <li><%= comm.comment_writer.username %> said: <%= comm.content %></li>
+  <% end %>
+<ul>

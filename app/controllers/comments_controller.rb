@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
   def new
-    @book = Book.find(params[:book_id])
+    @book = commented_book
     @comment = Comment.new
   end
 
@@ -13,9 +13,18 @@ class CommentsController < ApplicationController
     redirect_to book_path(book)
   end
 
+  def index
+    @book = commented_book
+    @comments = commented_book.comments
+  end
+
   private
     def comment_params
       params.require(:comment).permit(:content)
+    end
+
+    def commented_book
+      @book ||= Book.find(params[:book_id])
     end
 
 end

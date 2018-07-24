@@ -12,9 +12,9 @@ Specs:
 - [X] Include login (how e.g. Devise) - Welcome page links to a login form (/sessions/new) which takes user input of username and password and that form submits to sessions#create, which logs the user in if their username can be found and then password authenticated.
 - [X] Include logout (how e.g. Devise) - When a user is logged in, there is a logout button present in the navbar. The button submits to sessions#delete which clears the session id, sets current user to nil, and then redirects to welcome page.
 - [X] Include third party signup/login (how e.g. Devise/OmniAuth) - Using OmniAuth and OmniAuth-Facebook gems to allow for signup/login via FB. There is a link on homepage for signing up/logging in via FB.
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes)
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients)
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [X] Include nested resource show or index (URL e.g. users/2/recipes) - Comments are a nested resource of Books. You can see all comments about a book at /books/:id/comments - there's a button on the Book's show page which takes you to its comments index page.
+- [X] Include nested resource "new" form (URL e.g. recipes/1/ingredients) - Comments are a nested resource of Books. You can add a comment on a book in the form at /books/:id/comments/new - there's a button on the Book's show page which takes you to its new comment form.
+- [X] Include form display of validation errors (form URL e.g. /recipes/new) - The books partial (_form.html.erb) which is used in the new and edit views for books, will display at the top of the page any errors on the book, when the form is rendered.
 
 Confirm:
 - [ ] The application is pretty DRY

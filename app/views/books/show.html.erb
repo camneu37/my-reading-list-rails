@@ -19,14 +19,10 @@
 
 <!-- <%= button_to "Delete Book", book_path(@book.id), method: "delete" %> -->
 
-<br><br>
+<br>
 
+<%= button_to "Add Comment", new_book_comment_path(@book), method: "get" %>
 
-<%= form_for [@book, @comment] do |f| %>
-  <%= f.text_area :content %>
-  <br>
-  <%= f.submit "Add Comment"%>
-<% end %>
 
 <br><br>
 

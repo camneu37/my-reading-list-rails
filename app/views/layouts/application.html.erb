@@ -15,18 +15,19 @@
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/">My Reading List</a>
+            <%= link_to "My Reading List", root_path, class: "navbar-brand" %>
           </div>
           <ul class="nav navbar-nav">
-            <li><a href="/books">Book Library</a></li>
-            <li><a href="/authors">Author List</a></li>
+            <li><%=link_to "Book Library", books_path %></li>
+            <li><%=link_to "Author List", authors_path %></li>
+            <li><%=link_to "Add New Book", new_book_path %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
-              <li><%= button_to "Log Out", session_path(current_user.id), method: "delete", class: "btn navbar-btn btn-danger" %></li>
+              <li><%= button_to "Log Out", session_path(current_user.id), method: "delete", class: "btn btn-danger"%></li>
             <% else %>
-              <li><a href="/users/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-              <li><a href="/sessions/new"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              <li><%=link_to "SignUp", new_user_path, class: "glyphicon glyphicon-user" %></li>
+              <li><%=link_to "LogIn", new_session_path, class:"glyphicon glyphicon-log-in" %></li>
             <% end %>
           </ul>
         </div>

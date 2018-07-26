@@ -16,6 +16,9 @@ class CommentsController < ApplicationController
   def index
     @book = commented_book
     @comments = commented_book.comments
+    if @comments.empty?
+      redirect_to book_path(@book)
+    end
   end
 
   private

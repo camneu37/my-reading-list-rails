@@ -29,6 +29,10 @@ class Book < ApplicationRecord
     end
   end
 
+  def self.all_alphabetized
+    order(:title)
+  end
+
   private
 
     def self.find_by_date_added(date)

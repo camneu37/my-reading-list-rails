@@ -5,7 +5,7 @@ class BooksController < ApplicationController
     if params.has_key?("date") && !params[:date].empty?
       @books = Book.added_past(params[:date])
     else
-      @books = Book.all
+      @books = Book.all_alphabetized
     end
   end
 

@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
   before_action :authentication_required
 
   def index
-    @authors = Author.all
+    @authors = Author.all_alphabetized
   end
 
   def show

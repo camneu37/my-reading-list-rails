@@ -7,12 +7,7 @@
       <%= submit_tag "Filter" %>
     <% end %>
     <%= button_to "Clear Filter", books_path, method: "get" %>
-
-    <br>
   </div>
-
-  <%= button_to "Add a New Book", new_book_path, method: "get" %>
-
 </div>
 
 <% if flash[:message] %>

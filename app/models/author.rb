@@ -1,7 +1,7 @@
 class Author < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
-  has_many :books
+  has_many :books, dependent: :destroy
   before_validation :make_name_upcase
 
   def make_name_upcase

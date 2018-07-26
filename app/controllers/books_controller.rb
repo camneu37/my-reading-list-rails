@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     if params.has_key?("date") && !params[:date].empty?
-      @books = Book.added_past(params[:date])
+      @books = Book.added_in_past(params[:date])
     else
       @books = Book.all_alphabetized
     end

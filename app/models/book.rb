@@ -16,7 +16,7 @@ class Book < ApplicationRecord
     self.author.name
   end
 
-  def self.added_past(timeframe)
+  def self.added_in_past(timeframe)
     case timeframe
       when "Day"
         find_by_date_added(Date.today.days_ago(1))

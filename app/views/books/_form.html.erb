@@ -18,7 +18,7 @@
   <%= f.label "Non-fiction" %>
   <br>
   <%= label_tag "Author (select from drop down or add new):" %><br>
-  <%= f.collection_select :author_id, Author.all, :id, :name, {include_blank: true} %><br>
+  <%= f.collection_select :author_id, Author.all_alphabetized, :id, :name, {include_blank: true} %><br>
   <%= text_field_tag "book[author]"  %>
   <br>
   <%= label_tag "About:" %><br>

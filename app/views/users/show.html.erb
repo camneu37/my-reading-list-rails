@@ -3,7 +3,7 @@
 </div>
 
 <ul>
-  <% @user.books.each do |b| %>
+  <% @user.reading_list_alphabetized.each do |b| %>
     <li><%= link_to b.title, book_path(b) %></li>
   <% end %>
 </ul>

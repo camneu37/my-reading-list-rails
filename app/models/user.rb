@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def remove_book_from_reading_list(book)
     books.delete(book)
   end
+
+  def reading_list_alphabetized
+    books.order(:title)
+  end
 end

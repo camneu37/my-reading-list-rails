@@ -33,6 +33,6 @@ class UsersController < ApplicationController
     end
 
     def user
-      @user ||= User.find(params[:id])
+      @user ||= User.find(params[:id]) if User.exists?(params[:id])
     end
 end

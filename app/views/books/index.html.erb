@@ -1,5 +1,12 @@
 <div class="page-header">
   <h2>Book Library</h2>
+  <div class="filters">
+    <p>See newly added books from the past:</p>
+      <%= form_tag books_path, method: "get" do %>
+        <%= select_tag "date", options_for_select(["Day", "Week", "Month", "Year"]), include_blank: true %>
+        <%= submit_tag "Filter" %>
+      <% end %>
+  </div>
 </div>
 
 <% if flash[:message] %>

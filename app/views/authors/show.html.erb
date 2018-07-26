@@ -9,3 +9,7 @@
     <% end %>
   </ul>
 </div>
+
+<br><br>
+
+<%= button_to "Add a new book by #{@author.name}", new_author_book_path(@author), method: "get" %>

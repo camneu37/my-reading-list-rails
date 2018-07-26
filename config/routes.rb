@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :new, :create]
   end
   resources :users
-  resources :authors, only: [:index, :show]
+  resources :authors, only: [:index, :show] do
+    resources :books, only: [:new]
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   root 'welcome#home'

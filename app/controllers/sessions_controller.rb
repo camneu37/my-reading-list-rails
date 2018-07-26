@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(username: params[:username])
     if auth
       @user = User.find_or_create_by(uid: auth[:uid]) do |u|
-        u.name = auth[:info][:name][0]
+        u.name = auth[:info][:name].split(" ")[0]
         u.username = auth[:info][:name].downcase.split(" ").join("_")
         u.password = SecureRandom.hex
         u.password_confirmation = u.password
@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     elsif params[:username].empty? || params[:password].empty?
-      flash[:message] = "Must fill in username and password fields"
+      flash[:message] = "Must fill in username and password fields."
       render :new
     elsif @user.nil?
       flash[:message] = "We couldn't find an account with that username, please try again or create a new account."

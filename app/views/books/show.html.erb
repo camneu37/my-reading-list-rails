@@ -2,14 +2,12 @@
   <h2><%= @book.title %></h2>
 </div>
 
-<div class="book-attrs list">
-  <ul>
-    <li><%= link_to @book.author_name, author_path(@book.author) %></li>
-    <li><%= @book.genre %></li>
-    <% if !@book.about.empty? %>
-      <li><%= @book.about %></li>
-    <% end %>
-  </ul>
+<div class="book-attrs">
+  <h4>Author: <%= link_to @book.author_name, author_path(@book.author) %></h4>
+  <% if !@book.about.empty? %>
+    <p>About: <%= @book.about %></p>
+  <% end %>
+  <p>Genre: <%= @book.genre %></p>
 </div>
 
 <%= button_to "Add Book to Reading List", add_book_path(@book) if !current_user.books.include?(@book)%>

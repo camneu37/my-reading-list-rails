@@ -15,4 +15,23 @@ class Book < ApplicationRecord
   def author_name
     self.author.name
   end
+
+  def self.added_past(timeframe)
+    case timeframe
+      when "Day"
+        find_by_date_added(Date.today.days_ago(1))
+      when "Week"
+        find_by_date_added(Date.today.weeks_ago(1))
+      when "Month"
+        find_by_date_added(Date.today.months_ago(1))
+      when "Year"
+        find_by_date_added(Date.today.years_ago(1))
+    end
+  end
+
+  private
+
+    def self.find_by_date_added(date)
+      where("created_at >= ?", date)
+    end
 end

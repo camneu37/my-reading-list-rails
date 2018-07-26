@@ -2,7 +2,11 @@ class BooksController < ApplicationController
   before_action :authentication_required
 
   def index
-    @books = Book.all
+    if params.has_key?("date") && !params[:date].empty?
+      @books = Book.added_past(params[:date])
+    else
+      @books = Book.all
+    end
   end
 
   def show

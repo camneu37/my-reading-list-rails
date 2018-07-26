@@ -6,6 +6,7 @@
         <%= select_tag "date", options_for_select(["Day", "Week", "Month", "Year"]), include_blank: true %>
         <%= submit_tag "Filter" %>
       <% end %>
+      <%= button_to "Clear Filter", books_path, method: "get" %>
   </div>
 </div>
 

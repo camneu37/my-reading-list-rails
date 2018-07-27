@@ -4,8 +4,9 @@ RSpec.describe Book, type: :model do
   let(:user) {
     User.create(
       name: "Camille",
-      email: "camille@neuner.com",
-      password: "testpassword"
+      username: "camille_neuner",
+      password: "testpassword",
+      password_confirmation: "testpassword"
     )
   }
 
@@ -38,14 +39,14 @@ RSpec.describe Book, type: :model do
   end
 
   it "has many users" do
-    new_user = book.users.create(name: "Will", email: "will@neuner.com", password: "testpassword")
+    new_user = book.users.create(name: "Will", username: "will_n", password: "testpassword", password_confirmation: "testpassword")
     book.users << user
     expect(book.users.first).to eq(new_user)
     expect(book.users.last).to eq(user)
   end
 
   it "belongs to many users" do
-    new_user = book.users.create(name: "Will", email: "will@neuner.com", password: "testpassword")
+    new_user = book.users.create(name: "Will", username: "will_n", password: "testpassword", password_confirmation: "testpassword")
     book.users << user
     expect(user.books).to include(book)
     expect(new_user.books).to include(book)

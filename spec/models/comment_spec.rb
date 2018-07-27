@@ -4,8 +4,9 @@ RSpec.describe Book, type: :model do
   let(:user) {
     User.create(
       name: "Camille",
-      email: "camille@neuner.com",
-      password: "testpassword"
+      username: "camille_neuner",
+      password: "testpassword",
+      password_confirmation: "testpassword"
     )
   }
 
@@ -42,11 +43,11 @@ RSpec.describe Book, type: :model do
   end
 
   it "belongs to a user" do
-    expect(comment.user).to eq(user)
+    expect(comment.comment_writer).to eq(user)
   end
 
   it "belongs to a book" do
-    expect(comment.book).to eq(book)
+    expect(comment.book_commented).to eq(book)
   end
 
 

@@ -5,8 +5,7 @@ class Book < ApplicationRecord
   has_many :comment_writers, through: :comments, source: 'comment_writer'
 
 
-  validates :title, presence: true
-  validates :title, uniqueness: true
+  validates :title, presence: true, uniqueness: true
   validates :genre, inclusion: { in: %w(Fiction Non-fiction)}
 
   before_validation :make_title_case

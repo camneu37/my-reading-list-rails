@@ -15,7 +15,7 @@ class Book < ApplicationRecord
   end
 
   def author_name
-    self.author.name
+    author.name
   end
 
   def self.added_in_past(timeframe)

@@ -1,11 +1,14 @@
 class Book < ApplicationRecord
+  belongs_to :author
+  has_and_belongs_to_many :users
+  has_many :comments, dependent: :destroy
+  has_many :comment_writers, through: :comments, source: 'comment_writer'
+
+
   validates :title, presence: true
   validates :title, uniqueness: true
   validates :genre, inclusion: { in: %w(Fiction Non-fiction)}
-  has_and_belongs_to_many :users
-  belongs_to :author
-  has_many :comments, dependent: :destroy
-  has_many :comment_writers, through: :comments, source: 'comment_writer'
+
   before_validation :make_title_case
 
   def make_title_case

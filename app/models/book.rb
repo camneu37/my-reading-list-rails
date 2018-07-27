@@ -21,13 +21,13 @@ class Book < ApplicationRecord
   def self.added_in_past(timeframe)
     case timeframe
     when "Day"
-      find_by_date_added(Date.today.days_ago(1))
+      where("created_at >= ?", Date.today.days_ago(1))
     when "Week"
-      find_by_date_added(Date.today.weeks_ago(1))
+      where("created_at >= ?", Date.today.weeks_ago(1))
     when "Month"
-      find_by_date_added(Date.today.months_ago(1))
+      where("created_at >= ?", Date.today.months_ago(1))
     when "Year"
-      find_by_date_added(Date.today.years_ago(1))
+      where("created_at >= ?", Date.today.years_ago(1))
     end
   end
 
@@ -35,9 +35,4 @@ class Book < ApplicationRecord
     order(:title)
   end
 
-  private
-
-    def self.find_by_date_added(date)
-      where("created_at >= ?", date)
-    end
 end

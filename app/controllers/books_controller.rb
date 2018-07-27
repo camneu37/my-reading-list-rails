@@ -11,27 +11,14 @@ class BooksController < ApplicationController
 
   def show
     @book = book
-    @comment = Comment.new
   end
 
   def new
     @book = Book.new
   end
 
-
-  ##try to refactor the create action to make it more lean
   def create
-    @book = Book.new(book_params)
-    if only_new_author?(params)
-      a = Author.create(name: params[:book][:author])
-      if a.errors[:name].any?
-        @book.errors.add(:author, "already exists, please select their name from the dropdown")
-      else
-        @book.author = a
-      end
-    elsif double_author_entry?(params)
-      @book.errors.add(:author, "must be either selected from existing list or a new name entered")
-    end
+    @book = Book.new_from_params(book_params, params[:book][:author_name])
     if !@book.errors.any? && @book.save
       @book.update(creator_id: current_user.id)
       current_user.add_book_to_reading_list(@book)
@@ -40,9 +27,6 @@ class BooksController < ApplicationController
       render :new
     end
   end
-
-
-
 
   def edit
     @book = book
@@ -99,22 +83,6 @@ class BooksController < ApplicationController
 
     def book_params
       params.require(:book).permit(:title, :author_id, :genre, :about)
-    end
-
-    def double_author_entry?(params)
-      !params[:book][:author].empty? && !params[:book][:author_id].empty?
-    end
-
-    def only_existing_author?(params)
-      params[:book][:author].empty? && !params[:book][:author_id].empty?
-    end
-
-    def only_new_author?(params)
-      !params[:book][:author].empty? && params[:book][:author_id].empty?
-    end
-
-    def no_author_entry?(params)
-      params[:book][:author].empty? && params[:book][:author_id].empty?
     end
 
 end

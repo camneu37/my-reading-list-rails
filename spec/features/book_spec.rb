@@ -8,6 +8,11 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
     @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
     @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
     @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+    @user = User.create(name: "Test User", username: "test user", password: "test", password_confirmation: "test")
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
+    click_button("Log In")
   end
 
   it 'has an index page for the book library' do
@@ -32,23 +37,29 @@ describe 'Feature Test: Book Library (Books Index Page)', type: :feature do
     expect(page).to have_content(@book_one.about)
   end
 
-  it 'has a button to get to the new book form' do
-    visit '/books'
-    click_button("Add a Book")
-    expect(current_path).to eq('/books/new')
-    expect(page).to have_content("New Book Form")
-  end
+  #THIS TEST NO LONGER PASSES WITH ADD BOOK LINK MOVED TO NAV BAR
+  # it 'has a button to get to the new book form' do
+  #   visit '/books'
+  #   click_button("Add a Book")
+  #   expect(current_path).to eq('/books/new')
+  #   expect(page).to have_content("New Book Form")
+  # end
 
 end
 
 describe 'Feature Test: Viewing a Books Details & Deleting a Book', type: :feature do
 
   before :each do
+    @user = User.create(name: "Test User", username: "test user", password: "test", password_confirmation: "test")
     @author_one = Author.create(name: "Test Author 1")
     @author_two = Author.create(name: "Test Author 2")
-    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
+    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction", creator_id: @user.id)
     @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
     @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
+    click_button("Log In")
   end
 
   it 'shows the books title, author, genre and about (if present)' do
@@ -77,13 +88,14 @@ describe 'Feature Test: Viewing a Books Details & Deleting a Book', type: :featu
     expect(page).to have_button("Update Book")
   end
 
-  it 'allows for deleting a book' do
-    visit '/books/1'
-    expect(page).to have_button("Delete Book")
-    click_button("Delete Book")
-    expect(current_path).to eq("/books")
-    expect(page).to have_content("You've successfully deleted #{@book_one.title}.")
-  end
+  #HAVE THIS FUNCTION REMOVED FROM APP RIGHT NOW
+  # it 'allows for deleting a book' do
+  #   visit '/books/1'
+  #   expect(page).to have_button("Delete Book")
+  #   click_button("Delete Book")
+  #   expect(current_path).to eq("/books")
+  #   expect(page).to have_content("You've successfully deleted #{@book_one.title}.")
+  # end
 
 end
 
@@ -95,6 +107,11 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
     @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
     @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+    @user = User.create(name: "Test User", username: "test user", password: "test", password_confirmation: "test")
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
+    click_button("Log In")
   end
 
   it 'has a new book form' do
@@ -111,7 +128,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
   it 'displays an error message if submit without a title' do
     visit '/books/new'
     choose("book_genre_fiction")
-    fill_in("book[author]", with: "A new author")
+    fill_in("book[author_name]", with: "A new author")
     fill_in("book[about]", with: "About a new book...")
     click_button("Create Book")
     expect(page).to have_content("New Book Form")
@@ -121,7 +138,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
   it 'displays an error message if no genre selected' do
     visit '/books/new'
     fill_in("book[title]", with: "A new book")
-    fill_in("book[author]", with: "A new author")
+    fill_in("book[author_name]", with: "A new author")
     fill_in("book[about]", with: "About a new book...")
     click_button("Create Book")
     expect(page).to have_content("New Book Form")
@@ -133,7 +150,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     fill_in("book[title]", with: "A new book")
     choose("book_genre_fiction")
     select("Test Author 1", from: "book_author_id")
-    fill_in("book[author]", with: "A new author")
+    fill_in("book[author_name]", with: "A new author")
     click_button("Create Book")
     expect(page).to have_content("New Book Form")
     expect(page).to have_content("Author must be either selected from existing list or a new name entered")
@@ -166,7 +183,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     visit '/books/new'
     fill_in("book[title]", with: "Test Book 4")
     choose("book_genre_non-fiction")
-    fill_in("book[author]", with: "Test Author 3")
+    fill_in("book[author_name]", with: "Test Author 3")
     fill_in("book[about]", with: "About test book 4...")
     click_button("Create Book")
     expect(current_path).to eq("/books/4")
@@ -191,11 +208,16 @@ end
 describe 'Feature Test: Editing a Book', type: :feature do
 
   before :each do
+    @user = User.create(name: "Test User", username: "test user", password: "test", password_confirmation: "test")
     @author_one = Author.create(name: "Test Author 1")
     @author_two = Author.create(name: "Test Author 2")
-    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction")
+    @book_one = @author_one.books.create(title: "Test Book 1", about: "A new test book", genre: "Fiction", creator_id: @user.id)
     @book_two = @author_one.books.create(title: "Test Book 2", about: "A new test book", genre: "Non-fiction")
     @book_three = @author_two.books.create(title: "Test Book 3", about: "A new test book", genre: "Fiction")
+    visit '/sessions/new'
+    fill_in("username", with: "test user")
+    fill_in("password", with: "test")
+    click_button("Log In")
   end
 
   it 'allows you to view a form to edit details of an existing book' do
@@ -225,7 +247,7 @@ describe 'Feature Test: Editing a Book', type: :feature do
   it 'allows you to edit and create a new author for the book' do
     visit '/books/1/edit'
     select("", from: "book_author_id")
-    fill_in("book[author]", with: "Test Author 3")
+    fill_in("book[author_name]", with: "Test Author 3")
     click_button("Update Book")
     expect(current_path).to eq("/books/1")
     expect(page).to have_content("Test Book 1")
@@ -243,7 +265,7 @@ describe 'Feature Test: Editing a Book', type: :feature do
 
   it 'does not allow you to select an existing author and add a new one' do
     visit '/books/1/edit'
-    fill_in("book[author]", with: "Test Author 3")
+    fill_in("book[author_name]", with: "Test Author 3")
     click_button("Update Book")
     expect(page).to have_content("Edit Book")
     expect(page).to have_content("Author must be either selected from existing list or a new name entered")

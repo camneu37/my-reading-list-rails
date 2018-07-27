@@ -162,7 +162,7 @@ describe 'Feature Test: Creating a New Book', type: :feature do
     choose("book_genre_fiction")
     click_button("Create Book")
     expect(page).to have_content("New Book Form")
-    expect(page).to have_content("Author must exist")
+    expect(page).to have_content("Author must be entered")
   end
 
   it 'creates a new book with an existing author' do

@@ -35,19 +35,31 @@ class Book < ApplicationRecord
     order(:title)
   end
 
-  def self.new_from_params(params, author_name)
+  def self.new_from_params(params, params_author_name)
     book = self.new(params)
-    if !author_name.blank? && params[:author_id].empty?
-      author = Author.create(name: author_name)
-      if author.errors[:name].any?
-        book.errors.add(:author, "already exists, please select their name from the dropdown")
-      else
-        book.author = author
-      end
-    elsif !author_name.blank? && !params[:author_id].empty?
-      book.errors.add(:author, "must be either selected from existing list or a new name entered")
-    end
+    book.add_author(params, params_author_name)
     book
+  end
+
+  def update_from_params(params, params_author_name)
+    update(params)
+    add_author(params, params_author_name)
+    self
+  end
+
+  def add_author(params, params_author_name)
+    if !params_author_name.blank? && params[:author_id].empty?
+      author = Author.create(name: params_author_name)
+      if author.errors[:name].any?
+        errors.add(:author, "already exists, please select their name from the dropdown")
+      else
+        update(author: author)
+      end
+    elsif !params_author_name.blank? && !params[:author_id].empty?
+      errors.add(:author, "must be either selected from existing list or a new name entered")
+    elsif params_author_name.blank? && params[:author_id].empty?
+      errors.add(:author, "must be entered")
+    end
   end
 
 end

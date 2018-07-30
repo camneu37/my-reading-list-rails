@@ -1,6 +1,6 @@
 My Reading List
 
-This app allows a user to create and log into an account and then view the Books/Authors in the app library and then add books to their personal reading list. Users can also add new books to the app library/their reading list, if the library does not contain the book they desire.
+This app allows a user to create and log into an account, view the Books/Authors in the app library, and then add books to their personal reading list. Users can also add new books to the app library/their reading list, if the library does not contain the book they desire. Users can also add personal user comments to any book in the app library.
 
 Usage
 

@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
 
   def new
     if logged_in?
@@ -8,7 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = sessions_user(params, auth)
+    user = Session.sessions_user(params, auth)
     if user.errors.any?
       @user = user
       render :new

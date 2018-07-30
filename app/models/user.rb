@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
-  
+
   has_secure_password
 
   def add_book_to_reading_list(book)
@@ -20,6 +20,15 @@ class User < ApplicationRecord
 
   def reading_list_alphabetized
     books.order(:title)
+  end
+
+  def self.find_or_create_from_auth(auth)
+    find_or_create_by(uid: auth[:uid]) do |u|
+      u.name = auth[:info][:name].split(" ")[0]
+      u.username = auth[:info][:name].downcase.split(" ").join("_")
+      u.password = SecureRandom.hex
+      u.password_confirmation = u.password
+    end
   end
 
 end

@@ -4,8 +4,8 @@ Specs:
 - [x] Using Ruby on Rails for the project - started the app with rails new to ensure it's a Rails app
 - [X] Include at least one has_many relationship (x has_many y e.g. User has_many Recipes) - User has_many Books (i.e. users can add many books to their reading list)
 - [X] Include at least one belongs_to relationship (x belongs_to y e.g. Post belongs_to User) - Book belongs_to Author (i.e. a book belongs to one author)
-- [X] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients) - Book has_many Users (as comment_writers) through Comments (i.e. a book can be commented on by many different users)
-- [X] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity) - Comments have content attribute (i.e. Comments belong_to Book (as book_commented) and User (as comment_writer) and thus have book_id and user_id, but also have a submittable attribute of content (i.e. what the user said about the book))
+- [X] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients) - User has_many Books (as books_commented) through Comments (i.e. a user can comment on many different books). Different from the relationship of has_and_belongs_to_many between books and users because that is in regards to books in a user's reading list, and a user may have commented on different books than those which are in their reading list (i.e. user.books may return different results than user.books_commented)
+- [X] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity) - Comments have a content attribute (i.e. Comments belong_to Book (as book_commented) and User (as comment_writer) and thus have book_id and user_id, but also have a submittable attribute of content (i.e. what the user said about the book))
 - [X] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) - validations on User, Comment, Book & Author
 - [X] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) - The filter option on Books index page (/books) utilizes Book.added_in_past(timeframe)
 - [X] Include signup (how e.g. Devise) - Welcome page links to a signup form (/users/new) which takes user input of name, username, password, and password confirmation and that form submits to users#create, which creates a new user (if no errors) and logs them in.
@@ -17,7 +17,7 @@ Specs:
 - [X] Include form display of validation errors (form URL e.g. /recipes/new) - The books partial (_form.html.erb) which is used in the new and edit views for books, will display at the top of the page any errors on the book, when the form is rendered.
 
 Confirm:
-- [ ] The application is pretty DRY
-- [ ] Limited logic in controllers
-- [ ] Views use helper methods if appropriate
-- [ ] Views use partials if appropriate
+- [X] The application is pretty DRY
+- [X] Limited logic in controllers
+- [X] Views use helper methods if appropriate
+- [X] Views use partials if appropriate

@@ -21,13 +21,13 @@ class Book < ApplicationRecord
   def self.added_in_past(timeframe)
     case timeframe
     when "Day"
-      where("created_at >= ?", Date.today.days_ago(1))
+      where("created_at >= ?", Date.today.days_ago(1)).order(:title)
     when "Week"
-      where("created_at >= ?", Date.today.weeks_ago(1))
+      where("created_at >= ?", Date.today.weeks_ago(1)).order(:title)
     when "Month"
-      where("created_at >= ?", Date.today.months_ago(1))
+      where("created_at >= ?", Date.today.months_ago(1)).order(:title)
     when "Year"
-      where("created_at >= ?", Date.today.years_ago(1))
+      where("created_at >= ?", Date.today.years_ago(1)).order(:title)
     end
   end
 

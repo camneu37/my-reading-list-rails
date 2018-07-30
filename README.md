@@ -1,24 +1,15 @@
-# README
+My Reading List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app allows a user to create and log into an account and then view the Books/Authors in the app library and then add books to their personal reading list. Users can also add new books to the app library/their reading list, if the library does not contain the book they desire.
 
-Things you may want to cover:
+Usage
 
-* Ruby version
+To use this app, just clone, run 'rake db:migrate' and then run 'thin start --ssl'
 
-* System dependencies
+Raising Issues
 
-* Configuration
+If you notice any problems with the app which you are not able to change yourself, please feel free to raise a Github issue with a clear description of the problem. Please include any relevant screenshots or snippets of the content. Issues will be reviewed and addressed as appropriate.
 
-* Database creation
+Pull Requests
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Please feel free to make changes yourself if you notice an opportunity for improvement of the app. To do so, please fork the repository, make the change on your fork (be sure to include descriptive commits), and then open a pull request against this repository. The pull request will be reviewed and addressed.

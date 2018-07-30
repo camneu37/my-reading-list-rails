@@ -4,7 +4,7 @@ This app allows a user to create and log into an account, view the Books/Authors
 
 Usage
 
-To use this app, just clone, run 'rake db:migrate' and then run 'thin start --ssl'
+To use this app, just clone, run 'bundle install', run 'rake db:migrate' and then run 'thin start --ssl'
 
 Raising Issues
 
@@ -13,3 +13,6 @@ If you notice any problems with the app which you are not able to change yoursel
 Pull Requests
 
 Please feel free to make changes yourself if you notice an opportunity for improvement of the app. To do so, please fork the repository, make the change on your fork (be sure to include descriptive commits), and then open a pull request against this repository. The pull request will be reviewed and addressed.
+
+LINK TO LICENSE
+[link name](./LICENSE)

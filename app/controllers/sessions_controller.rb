@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   def create
     user = sessions_user(params, auth)
     if user.errors.any?
+      @user = user
       render :new
     else
       session[:user_id] = user.id

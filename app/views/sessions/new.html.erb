@@ -1,7 +1,9 @@
-<% if flash[:message] %>
-  <div class="flash-message">
-    <h3><%= flash[:message] %></h3>
-  </div>
+<% if @user && @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <%= form_tag('/sessions') do %>

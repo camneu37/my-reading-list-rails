@@ -14,5 +14,4 @@ Pull Requests
 
 Please feel free to make changes yourself if you notice an opportunity for improvement of the app. To do so, please fork the repository, make the change on your fork (be sure to include descriptive commits), and then open a pull request against this repository. The pull request will be reviewed and addressed.
 
-LINK TO LICENSE
-[link name](./LICENSE)
+LINK TO [LICENSE](./LICENSE.md)

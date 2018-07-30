@@ -33,6 +33,10 @@
         </div>
       </nav>
 
+      <% if flash[:message] %>
+        <p><%= flash[:message] %></p>
+      <% end %>
+
       <%= yield %>
 
     </div>

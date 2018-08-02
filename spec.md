@@ -2,7 +2,7 @@
 
 Specs:
 - [x] Using Ruby on Rails for the project - started the app with rails new to ensure it's a Rails app
-- [X] Include at least one has_many relationship (x has_many y e.g. User has_many Recipes) - User has_many Books (i.e. users can add many books to their reading list)
+- [X] Include at least one has_many relationship (x has_many y e.g. User has_many Recipes) - User has_many Comments (i.e. users can add comments to books)
 - [X] Include at least one belongs_to relationship (x belongs_to y e.g. Post belongs_to User) - Book belongs_to Author (i.e. a book belongs to one author)
 - [X] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients) - User has_many Books (as books_commented) through Comments (i.e. a user can comment on many different books). Different from the relationship of has_and_belongs_to_many between books and users because that is in regards to books in a user's reading list, and a user may have commented on different books than those which are in their reading list (i.e. user.books may return different results than user.books_commented)
 - [X] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity) - Comments have a content attribute (i.e. Comments belong_to Book (as book_commented) and User (as comment_writer) and thus have book_id and user_id, but also have a submittable attribute of content (i.e. what the user said about the book))

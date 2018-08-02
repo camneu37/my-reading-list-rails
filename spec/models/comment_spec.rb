@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Book, type: :model do
+RSpec.describe Comment, type: :model do
   let(:user) {
     User.create(
       name: "Camille",

@@ -1,5 +1,8 @@
 <div class="page-header">
   <h2><%= @book.title %></h2>
+  <% if !@book.ratings.empty? %>
+    <p>Book's Average Rating: <%= @book.avg_rating("Book") %></p>
+  <% end %>
 </div>
 
 <div class="book-attrs">

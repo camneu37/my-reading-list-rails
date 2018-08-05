@@ -1,8 +1,7 @@
 <div class="page-header">
   <h2><%= @author.name %></h2>
   <% if !@author.ratings.empty? %>
-    <p>Author's Average Rating: <%= Rating.avg_rating("Author", @author) %></p>
-    <!-- NEED TO REFACTOR THE ABOVE, SHOULDNT CALL THE CLASS IN THE VIEW -->
+    <p>Author's Average Rating: <%= @author.avg_rating("Author") %></p>
   <% end %>
 </div>
 

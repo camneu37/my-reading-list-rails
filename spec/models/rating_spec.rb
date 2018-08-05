@@ -38,7 +38,12 @@ RSpec.describe Rating, type: :model do
       expect(rating_two).to be_valid
     end
 
-
-
+    it 'can provide average rating of selected object' do
+      r1 = author.ratings.create(rating: 1)
+      r2 = author.ratings.create(rating: 3)
+      r3 = author.ratings.create(rating: 3)
+      r4 = author.ratings.create(rating: 4)
+      expect(Rating.avg_rating("Author", author)).to eq(2.75)
+    end
 
 end

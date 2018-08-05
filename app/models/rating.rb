@@ -4,7 +4,8 @@ class Rating < ApplicationRecord
   validates :rating, numericality: {greater_than: 0, less_than_or_equal_to: 5}
 
   def self.avg_rating(type, object)
-    where(rateable_type: type, rateable_id: object.id).average(:rating)
+    avg_rating = where(rateable_type: type, rateable_id: object.id).average(:rating)
+    avg_rating.round(2)
   end
 
 

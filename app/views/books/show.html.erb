@@ -21,7 +21,7 @@
 <br>
 
 <p>Rate this book (1 being terrible, 5 being great):</p>
-<%= form_tag "/ratings" do %>
+<%= form_tag book_ratings_path(@book) do %>
   1 <%= radio_button_tag :rating, "1" %>
   2 <%= radio_button_tag :rating, "2" %>
   3 <%= radio_button_tag :rating, "3" %>

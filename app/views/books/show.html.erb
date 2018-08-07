@@ -20,6 +20,18 @@
 
 <br>
 
+<p>Rate this book (1 being terrible, 5 being great):</p>
+<%= form_tag "/ratings" do %>
+  1 <%= radio_button_tag :rating, "1" %>
+  2 <%= radio_button_tag :rating, "2" %>
+  3 <%= radio_button_tag :rating, "3" %>
+  4 <%= radio_button_tag :rating, "4" %>
+  5 <%= radio_button_tag :rating, "5" %>
+  <%= submit_tag "Submit Rating" %>
+<% end %>
+
+<br>
+
 <%= button_to "Edit Book", edit_book_path(@book.id), method: "get" if current_user.id == @book.creator_id || current_user.username == "admin" %>
 
 <br>

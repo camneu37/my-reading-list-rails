@@ -1,6 +1,17 @@
 <div class="page-header">
   <h2><%= @author.name %></h2>
+  <% if !@author.ratings.empty? %>
+    <p>Author's Average Rating: <%= @author.avg_rating("Author") %></p>
+  <% end %>
 </div>
+
+<p>Rate this author (1 being terrible, 5 being great):</p>
+<%= form_tag author_ratings_path(@author) do %>
+  <%= select_tag :rating, options_for_select([1, 2, 3, 4, 5]) %>
+  <%= submit_tag "Submit Rating" %>
+<% end %>
+
+<br>
 
 <div class="books list">
   <ul>

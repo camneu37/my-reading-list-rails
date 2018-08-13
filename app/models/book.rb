@@ -3,6 +3,7 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :comments, dependent: :destroy
   has_many :comment_writers, through: :comments, source: "comment_writer"
+  has_many :ratings, as: :rateable
 
 
   validates :title, presence: true, uniqueness: true

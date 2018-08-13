@@ -7,6 +7,7 @@ class AuthorsController < ApplicationController
 
   def show
     @author = author
+    # @avg_rating = Rating.avg_rating("Author", @author)
   end
 
   private

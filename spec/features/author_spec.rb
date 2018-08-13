@@ -43,6 +43,15 @@ describe 'Feature Test: Authors', type: :feature do
     expect(page).to have_content("Fiction")
   end
 
+  it 'shows the authors average rating on authors show page' do
+    @author_one.ratings.create(rating: 1)
+    @author_one.ratings.create(rating: 3)
+    @author_one.ratings.create(rating: 3)
+    @author_one.ratings.create(rating: 4)
+    visit '/authors/1'
+    expect(page).to have_content("Author's Average Rating: 2.75")
+  end
+
 
 
 end

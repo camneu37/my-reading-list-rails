@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :ratings, only: [:create]
   end
   resources :users, except: [:index, :edit, :update, :destroy]
-  resources :authors, only: [:index, :show]
+  resources :authors, only: [:index, :show] do
+    resources :ratings, only: [:create]
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   root 'welcome#home'

@@ -1,8 +1,7 @@
 class RatingsController < ApplicationController
 
-  #NEED REFACTOR THIS!
+  #TRY TO REFACTOR THIS LATER
   def create
-    binding.pry
     if params[:book_id]
       book = Book.find(params[:book_id])
       if book.already_rated_by_user?(current_user)

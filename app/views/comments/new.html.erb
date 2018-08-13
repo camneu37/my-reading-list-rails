@@ -1,6 +1,0 @@
-<h3>Add a comment about <%= @book.title %>:</h3>
-<%= form_for [@book, @comment] do |f| %>
-  <%= f.text_area :content %>
-  <br>
-  <%= f.submit "Add Comment"%>
-<% end %>

@@ -20,7 +20,11 @@
 
 <br>
 
-<p>Rate this book (1 being terrible, 5 being great):</p>
+<%= button_to "Edit Book", edit_book_path(@book.id), method: "get" if current_user.id == @book.creator_id || current_user.username == "admin" %>
+
+<br>
+
+<h4>Rate this book (1 being terrible, 5 being great):</h4>
 <%= form_tag book_ratings_path(@book) do %>
   <%= select_tag :rating, options_for_select([1, 2, 3, 4, 5]) %>
   <%= submit_tag "Submit Rating" %>
@@ -28,16 +32,22 @@
 
 <br>
 
-<%= button_to "Edit Book", edit_book_path(@book.id), method: "get" if current_user.id == @book.creator_id || current_user.username == "admin" %>
-
-<br>
-
-<%= button_to "Add Comment", new_book_comment_path(@book), method: "get" %>
+<h4>Add a comment about <%= @book.title %>:</h4>
+<%= form_for [@book, @comment] do |f| %>
+  <%= f.text_area :content %>
+  <br>
+  <%= f.submit "Add Comment"%>
+<% end %>
 
 <br>
 
 <% if @book.comments.any? %>
-  <%= button_to "See User Comments", book_comments_path(@book), method: "get" %>
+  <h4>User comments on <%= @book.title %>:</h4>
+  <ul>
+    <% @book.comments.each do |comm| %>
+      <li><%= comm.comment_writer.username %> said: <%= comm.content %></li>
+    <% end %>
+  <ul>
 <% end %>
 
 <br>

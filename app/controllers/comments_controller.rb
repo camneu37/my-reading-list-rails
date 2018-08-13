@@ -1,24 +1,10 @@
 class CommentsController < ApplicationController
 
-  def new
-    @book = commented_book
-    @comment = Comment.new
-  end
-
   def create
-    book = Book.find(params[:book_id])
-    comment = book.comments.build(comment_params)
+    comment = commented_book.comments.build(comment_params)
     comment.comment_writer = current_user
     comment.save
-    redirect_to book_path(book)
-  end
-
-  def index
-    @book = commented_book
-    @comments = commented_book.comments
-    if @comments.empty?
-      redirect_to book_path(@book)
-    end
+    redirect_to book_path(commented_book)
   end
 
   private

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :books do
-    resources :comments, only: [:index, :new, :create]
+    resources :comments, only: [:create]
     resources :ratings, only: [:create]
   end
   resources :users, except: [:index, :edit, :update, :destroy]
